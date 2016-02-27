@@ -3,6 +3,7 @@ package com.younge.wynews.cache;
 import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Log;
 
 import org.w3c.dom.Text;
 
@@ -52,6 +53,9 @@ public class DiskCacheImpl implements IDiskCache{
             return;
         }
         String fileName = getFileName(url);
+        if(TextUtils.isEmpty(fileName)){
+           return;
+        }
         File file = new File(folder,fileName);
         //保存到文件
         savaToFile(file,data);
@@ -71,8 +75,10 @@ public class DiskCacheImpl implements IDiskCache{
 
         //获取这个文件对象
         String fileName = getFileName(url);
+        if(TextUtils.isEmpty(fileName)){
+            return ret;
+        }
         File file = new File(folder,fileName);
-
         //获取文件中的内容
         ret = getDataFromFile(file);
         return ret;
@@ -100,7 +106,7 @@ public class DiskCacheImpl implements IDiskCache{
         String lastPathSegment = Uri.parse(url).getLastPathSegment();
         //如果图片没有最后的文件名则把url地址作为文件名
         if (lastPathSegment == null) {
-            return url;
+            return null;
         }
         return lastPathSegment;
     }
@@ -114,6 +120,7 @@ public class DiskCacheImpl implements IDiskCache{
         FileOutputStream fos = null;
         BufferedOutputStream bos = null;
 
+        Log.d("fileName:",file.getPath());
         try {
             fos = new FileOutputStream(file);
             bos = new BufferedOutputStream(fos);
@@ -157,8 +164,7 @@ public class DiskCacheImpl implements IDiskCache{
     private byte[] getDataFromFile(File file) {
         byte[] ret = null;
         //如果不存在，或者不是一个文件，直接返回
-        if (!file.exists() || !file.isFile()) {
-
+        if (!file.isFile()) {
             return ret;
         }
         FileInputStream fis = null;

@@ -1,11 +1,13 @@
 package com.younge.wynews.fragment.innerFragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.younge.wynews.R;
+import com.younge.wynews.activity.ArticleDetailActivity;
 import com.younge.wynews.adpter.ListViewAdapter;
 import com.younge.wynews.entity.ChapterListItem;
 import com.younge.wynews.utils.HttpAdress;
@@ -136,9 +139,9 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 bundle.putString("typeid", "2");
                 bundle.putString("id", imageInfo.value.toString());
                 //跳转到文章详情界面
-              /*  Intent intent = new Intent(getContext(), ArticleDetailActivity.class);
+                Intent intent = new Intent(getContext(), ArticleDetailActivity.class);
                 intent.putExtras(bundle);
-                startActivity(intent);*/
+                startActivity(intent);
             }
         });
         mImageCycleView.loadData(list, new ImageCycleView.LoadImageCallBack() {
@@ -179,7 +182,7 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-    /*    //点击条目跳转到详情界面
+        //点击条目跳转到详情界面
         Intent intent = new Intent(getContext(), ArticleDetailActivity.class);
         //将Url地址获取到
         Bundle bundle = new Bundle();
@@ -191,7 +194,7 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         bundle.putString("id", ariticleId);
         Log.i("=====>", "" + typeid + "=====》" + ariticleId);
         intent.putExtras(bundle);
-        startActivity(intent);*/
+        startActivity(intent);
     }
 
     @Override

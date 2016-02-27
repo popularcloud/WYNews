@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.younge.wynews.R;
+import com.younge.wynews.activity.ArticleDetailActivity;
 import com.younge.wynews.adpter.ListViewAdapter;
 import com.younge.wynews.entity.ChapterListItem;
 import com.younge.wynews.utils.HttpAdress;
@@ -137,7 +138,7 @@ public class CommondFragment extends Fragment implements SwipeRefreshLayout.OnRe
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-       /* //将Url地址获取到
+        //将Url地址获取到
         Bundle bundle = new Bundle();
         String typeid = chapterListItems.get(position).getTypeid();//获取到文章的分类id
         String ariticleId = chapterListItems.get(position).getId();//文章id
@@ -146,7 +147,8 @@ public class CommondFragment extends Fragment implements SwipeRefreshLayout.OnRe
         for (Integer item : VIDEO_TYPE_ID) {
             if (item == Integer.parseInt(typeid)) {
                 //点击条目跳转到视频详情界面
-                intent.setClass(getContext(), VideoDetailActivity.class);
+                //intent.setClass(getContext(), VideoDetailActivity.class);
+                return;
             } else {
                 //点击条目跳转到文章详情界面
                 intent.setClass(getContext(), ArticleDetailActivity.class);
@@ -155,7 +157,7 @@ public class CommondFragment extends Fragment implements SwipeRefreshLayout.OnRe
         bundle.putString("typeid", typeid);
         bundle.putString("id", ariticleId);
         intent.putExtras(bundle);
-        startActivity(intent);*/
+        startActivity(intent);
     }
 
     ///////////////////////////listview滑动监听方法/////////////////////
